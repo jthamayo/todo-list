@@ -1,50 +1,137 @@
-
-*{
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto Mono', sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 300;
-    color: var(--shadow-color);
-    background-color: var(--base-color);
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto Mono", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  color: #8ca5cb;
+  background-color: var(--base-color);
 }
-:root{
-    --base-color:  #ECF0F3;
-    --shadow-color: #D1D9E6;
-    --light-color: #FFF;
-}
-
-html, body{
-    width: 100%;
-    height: 100%;
-}
-
-ul{
-    list-style: none;
+:root {
+  --base-color: #ecf0f3;
+  --shadow-color: #d1d9e6;
+  --light-color: #fff;
+  --sunken-effect: inset 6px 6px 15px 0 var(--shadow-color),
+    inset -6px -6px 10px 0 var(--light-color);
+  --bump-effect: inset 6px 6px 10px 0 var(--light-color),
+    inset -6px -6px 10px 0 var(--shadow-color);
+  --raised-effect: 6px 6px 10px 0 var(--shadow-color),
+    -6px -6px 10px 0 var(--light-color);
 }
 
-h1{
-    text-transform: capitalize;
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-size: 2vw;
 }
 
-main{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center
+h1 {
+  text-transform: capitalize;
 }
 
-.menu{
-    border-radius: 20px;
-    padding: 5%;
-    width: 60%;
-    height: 40%;
-    filter: drop-shadow();
+ul {
+  list-style: none;
 }
 
-button{
-    border-color: transparent;
-    filter: drop-shadow();
+main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.card {
+  border-radius: 20px;
+  padding: 3%;
+  height: 60%;
+  aspect-ratio: 5/3;
+  box-shadow: var(--sunken-effect);
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.create-task {
+  width: 80%;
+  height: 30%;
+}
+
+form {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2%;
+}
+
+.task-row{
+  width: 100%;
+  height: 40%;
+  display: flex;
+  justify-content: center;
+}
+
+.task-options {
+  width: 35%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 10%;
+}
+
+.task-options button, .task-options input{
+  height: 100%;
+  width: 35%;
+}
+.task-text {
+  width: 100%;
+}
+.task-input {
+  border-radius: 5px;
+  box-shadow: var(--bump-effect);
+  padding: 0 2%;
+}
+.task-date {
+  width: 30%;
+}
+.task-input input {
+  display: block;
+  height: 100%;
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  font-weight: 600;
+}
+
+/* .task-input input[type="date"] {
+}
+
+ */
+input:focus {
+  outline: none;
+}
+
+button,
+input[type="submit"] {
+  box-shadow: var(--raised-effect);
+  border: none;
+  border-radius: 10px;
+  padding: 2%;
+  font-weight: 600;
+}
+
+button:active,
+input[type="submit"]:active {
+  box-shadow: var(--sunken-effect);
 }

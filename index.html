@@ -5,20 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo List</title>
     <link href="style.css" rel="stylesheet" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <main>
-      <div class="menu">
-        <h1>To do list</h1>
-        <div>
-          <ul>
-            <li>aaaaa</li>
-          </ul>
-          <button>add task</button>
-          <button>delete task</button>
+      <div class="card">
+        <div class="container">
+          <h1>To do list</h1>
+          <div class="task-list">
+            <ul>
+              You have no tasks so far
+            </ul>
+          </div>
+          <div>
+            <button>new task button</button>
+          </div>
+          <div class="create-task">
+            <form action="">
+              <div class="task-input task-row">
+                <input class="task-text" type="text" value="...." id="task0" />
+              </div>
+              <div class="task-row">
+                <div class="task-input task-date">
+                  <input type="date" value="..." id="task0" />
+                </div>
+                <div class="task-options">
+                  <input type="submit" value="add task" />
+                  <button>cancel</button>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </main>
