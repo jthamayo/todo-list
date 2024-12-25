@@ -61,6 +61,7 @@ main {
 }
 
 .create-task {
+  display: none;
   width: 80%;
   height: 30%;
 }
