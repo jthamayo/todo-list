@@ -1,10 +1,20 @@
+//add completion stats
+//add priority tasks
+//add button to remove tasks
+//drag tasks
+//add colored icons
+//add input validation
+//add new year resolution page
+
 let newTaskButton = document.getElementById("new-task");
+let taskButtons = document.getElementById("task-buttons");
 let taskFormContainer = document.querySelector(".create-task");
 let taskForm = document.getElementById("task-form");
+let taskList = document.getElementById("task-list");
 let tasks = new Array();
 
 newTaskButton.addEventListener("click", () => {
-  newTaskButton.style.display = "none";
+  taskButtons.style.display = "none";
   taskFormContainer.style.display = "block";
 });
 
@@ -14,7 +24,8 @@ taskForm.addEventListener("submit", (e) => {
   /*   if (validateInput(taskName)) {
     console.log("valid");
   } */
-  addListElement();
+  createListElement();
+  removeNewTaskMenu();
 });
 
 function validateInput(name) {}
@@ -27,9 +38,22 @@ function recoverData() {
   return [taskDate, taskName];
 }
 
-function addListElement() {
-  let taskList = document.getElementById("task-list");
+function createListElement() {
   let newTaskElement = document.createElement("li");
   newTaskElement.textContent = tasks[0][1];
   taskList.appendChild(newTaskElement);
+}
+
+function removeNewTaskMenu() {
+  taskButtons.style.display = "flex";
+  taskFormContainer.style.display = "none";
+}
+
+document.getElementById("clear-tasks").addEventListener("click", ()=>{
+    taskList.innerHTML = "";
+    deleteTasks();
+})
+
+function deleteTasks(){
+    tasks = new Array();
 }

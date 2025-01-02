@@ -59,6 +59,16 @@ main {
   justify-content: space-between;
   align-items: center;
 }
+#task-buttons{
+  display: flex;
+  justify-content: space-between;
+  width: 30%;
+}
+
+#task-buttons button{
+  width: 45%;
+  /*box-shadow: none;*/
+}
 
 .create-task {
   display: none;
@@ -115,10 +125,6 @@ form {
   font-weight: 600;
 }
 
-/* .task-input input[type="date"] {
-}
-
- */
 input:focus {
   outline: none;
 }
