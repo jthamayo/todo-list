@@ -5,6 +5,7 @@
 //add colored icons
 //add input validation
 //add new year resolution page
+//testing
 
 let newTaskButton = document.getElementById("new-task");
 let taskButtons = document.getElementById("task-buttons");
@@ -26,6 +27,7 @@ taskForm.addEventListener("submit", (e) => {
   } */
   createListElement();
   removeNewTaskMenu();
+  restetInput();
 });
 
 function validateInput(name) {}
@@ -36,6 +38,16 @@ function recoverData() {
   console.log(taskName);
   console.log(taskDate);
   return [taskDate, taskName];
+}
+
+function restetInput() {
+  function removeValueFromInput() {
+    taskForm.elements.taskName.value = "fill this field with a new name";
+    taskForm.elements.taskDate.value = "";
+  }
+  removeValueFromInput();
+  document.getElementById("task-name").style.animation =
+    "text-highlight 2.5s infinite ease-in-out";
 }
 
 function createListElement() {
@@ -49,11 +61,22 @@ function removeNewTaskMenu() {
   taskFormContainer.style.display = "none";
 }
 
-document.getElementById("clear-tasks").addEventListener("click", ()=>{
-    taskList.innerHTML = "";
-    deleteTasks();
-})
+document.getElementById("clear-tasks").addEventListener("click", () => {
+  taskList.innerHTML = "";
+  deleteTasks();
+});
 
-function deleteTasks(){
-    tasks = new Array();
+function deleteTasks() {
+  tasks = new Array();
 }
+
+const nameInput = document.getElementById("task-name");
+nameInput.addEventListener("input", () => {
+  const taskName = taskForm.elements.taskName.value.trim();
+  const isInvalidName =
+    taskName === "" || taskName === "fill this field with a new name";
+
+  nameInput.style.animation = isInvalidName
+    ? "text-highlight 2.5s infinite ease-in-out"
+    : "none";
+});

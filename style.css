@@ -123,6 +123,7 @@ form {
   border: none;
   background-color: transparent;
   font-weight: 600;
+  animation:  text-highlight 2.5s infinite ease-in-out;
 }
 
 input:focus {
@@ -141,4 +142,21 @@ input[type="submit"] {
 button:active,
 input[type="submit"]:active {
   box-shadow: var(--sunken-effect);
+}
+
+
+/* animations */
+
+@keyframes text-highlight {
+  0% {
+    color: #8ca5cb;
+  }
+
+  50% {
+    color: rgb(8, 17, 255);
+  }
+
+  100% {
+    color: #8ca5cb;
+  }
 }
