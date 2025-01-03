@@ -6,6 +6,7 @@
 //add input validation
 //add new year resolution page
 //testing
+//add progress bar till due date
 
 let newTaskButton = document.getElementById("new-task");
 let taskButtons = document.getElementById("task-buttons");

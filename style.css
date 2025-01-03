@@ -33,7 +33,7 @@ h1 {
 
 div.task-list-container {
   width: 100%;
-  height: 100%;
+  height: 60%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -97,10 +97,18 @@ main {
   justify-content: space-between;
   align-items: center;
 }
+
+#dot-line{
+  display: block;
+  width: 85%;
+  height: 2px;
+  border-top: 4px dotted var(--shadow-color);
+}
 #task-buttons {
   display: flex;
   justify-content: space-between;
   width: 30%;
+  height: 10%;
 }
 
 #task-buttons button {
@@ -110,8 +118,8 @@ main {
 
 .create-task {
   display: none;
-  width: 80%;
-  height: 30%;
+  width: 100%;
+  height: 10%;
 }
 
 form {
@@ -126,9 +134,9 @@ form {
 
 .task-row {
   width: 100%;
-  height: 40%;
+  height: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .task-options {
@@ -144,18 +152,24 @@ form {
   height: 100%;
   width: 35%;
 }
-.task-text {
-  width: 100%;
+#task-name, #task-date {
+  width: 92%;
 }
+
 .task-input {
   border-radius: 5px;
   box-shadow: var(--bump-effect);
-  padding: 0 2%;
 }
-.task-date {
-  width: 30%;
+.task-input:first-child {
+  width: 55%;
 }
+.task-input:nth-child(2) {
+  width: 20%;
+}
+
 .task-input input {
+  padding: 0 4%;
+  border-radius: inherit;
   display: block;
   height: 100%;
   width: 100%;
@@ -174,8 +188,8 @@ input[type="submit"] {
   box-shadow: var(--raised-effect);
   border: none;
   border-radius: 10px;
-  padding: 2%;
   font-weight: 600;
+  width: 10%;
 }
 
 button:active,
@@ -183,18 +197,25 @@ input[type="submit"]:active {
   box-shadow: var(--sunken-effect);
 }
 
-/* animations */
+/*---------------------------- animations */
 
 @keyframes text-highlight {
   0% {
     color: #8ca5cb;
+    border: 1px solid transparent;
   }
-
+  
   50% {
-    color: rgb(8, 17, 255);
+    color: rgb(78, 113, 255);
+    text-shadow:  0 0 2px rgb(174, 191, 255);
+    box-shadow: inset 0 0 10px rgba(20, 71, 255, 0.823);
+    border: 1px solid rgb(78, 113, 255);
+
   }
 
   100% {
     color: #8ca5cb;
+    border: 1px solid transparent;
+
   }
 }

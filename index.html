@@ -24,6 +24,7 @@
               You have no tasks so far
             </ul>
           </div>
+          <span id="dot-line"></span>
           <div id="task-buttons">
             <button id="new-task">add new task</button>
             <button id="clear-tasks">clear tasks</button>
@@ -31,18 +32,18 @@
           <!-------------------------- task form ---------------------------->
           <div class="create-task">
             <form id="task-form" action="">
-              <div class="task-input task-row">
-                <input
-                  class="task-text"
-                  type="text"
-                  value="fill this field with a new name"
-                  onfocus="this.value=''"
-                  id="task-name"
-                  name="taskName"
-                />
-              </div>
               <div class="task-row">
-                <div class="task-input task-date">
+                <div class="task-input">
+                  <input
+                    class="task-text"
+                    type="text"
+                    value="fill this field with a new name"
+                    onfocus="this.value=''"
+                    id="task-name"
+                    name="taskName"
+                  />
+                </div>
+                <div class="task-input">
                   <input
                     type="date"
                     value="..."
@@ -50,10 +51,8 @@
                     name="taskDate"
                   />
                 </div>
-                <div class="task-options">
-                  <input type="submit" value="add task" />
-                  <button>cancel</button>
-                </div>
+                <input type="submit" value="Add" />
+                <button>Cancel</button>
               </div>
             </form>
           </div>
