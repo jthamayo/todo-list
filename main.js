@@ -22,23 +22,25 @@ newTaskButton.addEventListener("click", () => {
 
 taskForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  tasks.unshift(recoverData());
-  /*   if (validateInput(taskName)) {
-    console.log("valid");
-  } */
-  createListElement();
+  //validaciones
+  if (tasks.length < 1) {
+    taskList.textContent = "";
+  }
+  tasks.unshift(recoverInput());
+  storeInLocalStorage();
+  createListElement(0);
   removeNewTaskMenu();
   restetInput();
 });
 
 function validateInput(name) {}
 
-function recoverData() {
+function recoverInput() {
   let taskName = taskForm.elements.taskName.value.trim();
   let taskDate = taskForm.elements.taskDate.value.trim();
   console.log(taskName);
   console.log(taskDate);
-  return [taskDate, taskName];
+  return [taskName, taskDate];
 }
 
 function restetInput() {
@@ -51,9 +53,9 @@ function restetInput() {
     "text-highlight 2.5s infinite ease-in-out";
 }
 
-function createListElement() {
+function createListElement(num) {
   let newTaskElement = document.createElement("li");
-  newTaskElement.textContent = tasks[0][1];
+  newTaskElement.textContent = tasks[num][0];
   taskList.appendChild(newTaskElement);
 }
 
@@ -63,13 +65,9 @@ function removeNewTaskMenu() {
 }
 
 document.getElementById("clear-tasks").addEventListener("click", () => {
-  taskList.innerHTML = "";
+  taskList.innerHTML = "You have no tasks so far";
   deleteTasks();
 });
-
-function deleteTasks() {
-  tasks = new Array();
-}
 
 const nameInput = document.getElementById("task-name");
 nameInput.addEventListener("input", () => {
@@ -80,4 +78,38 @@ nameInput.addEventListener("input", () => {
   nameInput.style.animation = isInvalidName
     ? "text-highlight 2.5s infinite ease-in-out"
     : "none";
+});
+
+//----------------------------------Local-Storage
+
+function storeInLocalStorage() {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+function recoverLocalStorageData() {
+  const data = localStorage.getItem("tasks");
+  if (data) {
+    tasks = JSON.parse(data);
+  }
+  return !!data;
+}
+
+function displayRecoveredData() {
+  if (recoverLocalStorageData()) {
+    taskList.textContent = "";
+    for (let i = tasks.length - 1; i >= 0; i--) {
+      createListElement(i);
+    }
+  } else {
+    taskList.textContent = "You have no tasks so far";
+  }
+}
+
+function deleteTasks() {
+  tasks = new Array();
+  localStorage.clear();
+}
+
+window.addEventListener("load", () => {
+  displayRecoveredData();
 });
