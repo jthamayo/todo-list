@@ -41,6 +41,7 @@ div.task-list-container {
 }
 
 ul {
+  list-style: none;
   padding-left: 20px;
   text-align: center;
   overflow-y: scroll;
@@ -50,18 +51,25 @@ ul {
 }
 
 li {
-  height: 35px;
+  height: 30px;
   width: 100%;
-  list-style-type: disc;
-  display: list-item;
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  align-items: center;
   position: relative;
+  padding-bottom: 1.5%;
+}
+li svg{
+  width: 18px;
+  fill: #8ccbad;
 }
 
 li::after {
   content: "";
   position: absolute;
   width: 100%;
-  height: 20%;
+  height: 15%;
   bottom: 0px;
   left: 0;
   border-radius: 5px;
