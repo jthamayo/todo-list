@@ -14,9 +14,9 @@
   </head>
   <body>
     <main>
+      <h1>To do list</h1>
       <div class="card">
         <div class="container">
-          <h1>To do list</h1>
           <!-------------------------- task list ---------------------------->
 
           <div class="task-list-container">
@@ -24,40 +24,55 @@
               You have no tasks so far
             </ul>
           </div>
-          <span id="dot-line"></span>
-          <div id="task-buttons">
-            <button id="new-task">New task</button>
-            <button id="clear-tasks">Clear tasks</button>
-          </div>
-          <!-------------------------- task form ---------------------------->
-
-          <div class="create-task">
-            <form id="task-form" action="">
-              <div class="task-row">
-                <div class="task-input">
-                  <input
-                    class="task-text"
-                    type="text"
-                    value="fill this field with a new name"
-                    onfocus="this.value=''"
-                    id="task-name"
-                    name="taskName"
-                  />
-                </div>
-                <div class="task-input">
-                  <input
-                    type="date"
-                    value="..."
-                    id="task-date"
-                    name="taskDate"
-                  />
-                </div>
-                <input type="submit" value="Add" />
-                <button>Cancel</button>
-              </div>
-            </form>
-          </div>
         </div>
+      </div>
+      <div id="task-buttons">
+        <button id="new-task">
+            <svg class="plus-icon">
+              <use xlink:href="assets/icons.svg#plus-solid"></use>
+            </svg>
+            <p>New task</p>
+        </button>
+        <button id="clear-tasks">
+            <svg class="xmark-icon">
+              <use xlink:href="assets/icons.svg#xmark-solid"></use>
+            </svg>
+            <p>Clear tasks</p>
+        </button>
+      </div>
+      <!-------------------------- task form ---------------------------->
+
+      <div class="create-task">
+        <form id="task-form" action="">
+          <div class="task-row">
+            <div class="task-input">
+              <input
+                class="task-text"
+                type="text"
+                value="fill this field with a new name"
+                onfocus="this.value=''"
+                id="task-name"
+                name="taskName"
+              />
+            </div>
+            <div class="task-input">
+              <input
+                type="date"
+                value="..."
+                id="task-date"
+                name="taskDate"
+              />
+            </div>
+            <button type="submit" value="">
+            <svg class="plus-icon">
+              <use xlink:href="assets/icons.svg#plus-solid"></use>
+            </svg>
+            </button>
+            <button><svg class="xmark-icon">
+              <use xlink:href="assets/icons.svg#xmark-solid"></use>
+            </svg></button>
+          </div>
+        </form>
       </div>
     </main>
     <script src="main.js"></script>

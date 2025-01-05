@@ -1,8 +1,6 @@
 //add completion stats
 //add priority tasks
-//add button to remove tasks
 //drag tasks
-//add colored icons
 //add input validation
 //add new year resolution page
 //testing
@@ -18,7 +16,7 @@ let tasks = new Array();
 
 newTaskButton.addEventListener("click", () => {
   taskButtons.style.display = "none";
-  taskFormContainer.style.display = "block";
+  taskFormContainer.style.display = "flex";
 });
 
 taskForm.addEventListener("submit", (e) => {
@@ -59,14 +57,59 @@ function createListElement(num) {
   let text = document.createElement("p");
   text.textContent = tasks[num][0];
 
-  let icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  let useElement = document.createElementNS("http://www.w3.org/2000/svg", "use");
-  useElement.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", "assets/icons.svg#square-check-regular");
-
-  icon.appendChild(useElement);
-  newTaskElement.appendChild(icon);
+  newTaskElement.appendChild(addCheckIcon());
   newTaskElement.appendChild(text);
+  newTaskElement.appendChild(addEditIcon());
+  newTaskElement.appendChild(addDeleteIcon());
   taskList.appendChild(newTaskElement);
+}
+
+function addCheckIcon() {
+  let icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  let useElement = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "use"
+  );
+  useElement.setAttributeNS(
+    "http://www.w3.org/1999/xlink",
+    "xlink:href",
+    "assets/icons.svg#square-check-regular"
+  );
+  icon.setAttribute("class", "check-icon");
+  icon.appendChild(useElement);
+  return icon;
+}
+
+function addEditIcon() {
+  let icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  let useElement = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "use"
+  );
+  useElement.setAttributeNS(
+    "http://www.w3.org/1999/xlink",
+    "xlink:href",
+    "assets/icons.svg#pen-to-square-solid"
+  );
+  icon.setAttribute("class", "edit-icon");
+  icon.appendChild(useElement);
+  return icon;
+}
+
+function addDeleteIcon() {
+  let icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  let useElement = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "use"
+  );
+  useElement.setAttributeNS(
+    "http://www.w3.org/1999/xlink",
+    "xlink:href",
+    "assets/icons.svg#trash-solid"
+  );
+  icon.setAttribute("class", "trash-icon");
+  icon.appendChild(useElement);
+  return icon;
 }
 
 function removeNewTaskMenu() {
