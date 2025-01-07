@@ -8,12 +8,13 @@
 }
 :root {
   --secondary-color: rgb(255, 248, 248);
-  --base-color: #f3ecf2;
-  --shadow-color: #e6d1d5;
+  --base-color: #ffe6f5;
+  --shadow-color: #e1c6cb;
   --light-color: #fff5f5;
   --accent-color: #fc7ce2;
+  --completed-color: #fc7c7c;
   --sunken-effect: inset 6px 6px 15px 0 var(--shadow-color),
-    inset -6px -6px 10px 0 var(--light-color);
+    inset -6px -6px 10px 0 white;
   --bump-effect: inset 6px 6px 10px 0 var(--light-color),
     inset -6px -6px 10px 0 var(--shadow-color);
   --raised-effect: 6px 6px 10px 0 var(--shadow-color),
@@ -93,7 +94,15 @@ li {
   border-radius: 15px;
   margin: 0 auto;
   margin: 25px 3%;
+  cursor: grab;
 }
+
+li.completed{
+  box-shadow: var(--sunken-effect);
+  background-color: var(--base-color);
+  text-decoration: line-through;
+}
+
 
 li p {
   overflow: hidden;
@@ -104,26 +113,52 @@ li p {
 svg {
   width: 20px;
   height: 20px;
-  fill: #15d679;
+  fill: var(--accent-color);
   background-color: transparent;
-  box-shadow: var(--raised-effect);
   border-radius: 3px;
 }
 
+/* li.completed .task-icon{
+  box-shadow: var(--sunken-effect);
+} */
+
+.task-icon{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  box-shadow: var(--raised-effect);
+  height: 27px;
+  width: 27px;
+}
+
+.task-icon:active{
+  box-shadow: var(--sunken-effect);
+}
+
 .trash-icon {
-  fill: rgb(165, 173, 204);
-  margin-left: auto;
   margin: 0;
   margin-right: 15px;
 }
 .edit-icon {
-  fill: rgb(230, 203, 108);
   margin-left: auto;
 }
 .check-icon {
   margin: 0 15px;
-  width: 25px;
-  height: 25px;
+}
+
+.edit-icon svg{
+  fill: rgb(254, 175, 91);
+  height: 100%;
+}
+.trash-icon svg{
+  width: 100%;
+  fill: rgb(135, 155, 237);
+}
+
+.check-icon svg{
+  width: 100%;
+  height: 100%;
 }
 
 li::after {
@@ -146,14 +181,22 @@ li::before {
   height: 10%;
   bottom: 3px;
   left: 3%;
-  background-color: var(--accent-color);
-  box-shadow: 0 0 15px var(--accent-color);
+  background-color: var(--completed-color);
+  box-shadow: 0 0 2px var(--accent-color);
   z-index: 25;
   border-radius: 3px;
+  background: linear-gradient(to right, var(--completed-color), var(--accent-color));
+  transition: width 0.6s ease, background 0.4s ease;
+}
+
+li.completed::before {
+  width: 94%;
+  opacity: 0.7;
+  background: linear-gradient(to right, rgb(254, 175, 91), var(--completed-color), var(--accent-color), rgb(135, 155, 237));
 }
 
 .xmark-icon {
-  fill: rgb(235, 134, 123);
+  fill: var(--completed-color);
 }
 /*----------------------------------------------*/
 
@@ -172,6 +215,7 @@ main {
   text-align: center;
   background-color: var(--secondary-color);
   max-width: 800px;
+  min-width: 490px;
 }
 
 .card {
@@ -258,7 +302,7 @@ form {
   width: 85%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: stretch;
   align-items: center;
   gap: 5%;
 }

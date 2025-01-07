@@ -61,10 +61,15 @@ function createListElement(num) {
   newTaskElement.appendChild(text);
   newTaskElement.appendChild(addEditIcon());
   newTaskElement.appendChild(addDeleteIcon());
+  newTaskElement.setAttribute("draggable", "true");
   taskList.appendChild(newTaskElement);
 }
 
 function addCheckIcon() {
+  let container = document.createElement("div");
+  container.classList.add("task-icon");
+  container.classList.add("check-icon");
+  container.addEventListener("click", createTaskCheckHandler());
   let icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   let useElement = document.createElementNS(
     "http://www.w3.org/2000/svg",
@@ -75,12 +80,15 @@ function addCheckIcon() {
     "xlink:href",
     "assets/icons.svg#square-check-regular"
   );
-  icon.setAttribute("class", "check-icon");
   icon.appendChild(useElement);
-  return icon;
+  container.appendChild(icon);
+  return container;
 }
 
 function addEditIcon() {
+  let container = document.createElement("div");
+  container.classList.add("edit-icon");
+  container.classList.add("task-icon");
   let icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   let useElement = document.createElementNS(
     "http://www.w3.org/2000/svg",
@@ -91,12 +99,16 @@ function addEditIcon() {
     "xlink:href",
     "assets/icons.svg#pen-to-square-solid"
   );
-  icon.setAttribute("class", "edit-icon");
   icon.appendChild(useElement);
-  return icon;
+  container.appendChild(icon);
+  return container;
 }
 
 function addDeleteIcon() {
+  let container = document.createElement("div");
+  container.classList.add("task-icon");
+  container.classList.add("trash-icon");
+  container.addEventListener("click", handleTrashEvent);
   let icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   let useElement = document.createElementNS(
     "http://www.w3.org/2000/svg",
@@ -107,10 +119,41 @@ function addDeleteIcon() {
     "xlink:href",
     "assets/icons.svg#trash-solid"
   );
-  icon.setAttribute("class", "trash-icon");
   icon.appendChild(useElement);
-  return icon;
+  container.appendChild(icon);
+  return container;
 }
+
+//-------------------------event-handler
+
+function createTaskCheckHandler() {
+  let isChecked = true;
+  return function (e) {
+    const check = e.currentTarget;
+    isChecked = !isChecked;
+    check.parentNode.style.textDecorationColor = "var(--accent-color)";
+    check.parentNode.style.textDecorationThickness = "3px";
+    const iconType = isChecked ? "square-check-regular" : "square-check-solid";
+    check
+      .querySelector("use")
+      .setAttributeNS(
+        "http://www.w3.org/1999/xlink",
+        "xlink:href",
+        `assets/icons.svg#${iconType}`
+      );
+      check.parentNode.classList.toggle("completed");
+  };
+}
+
+function handleEditEvent(){
+
+}
+
+function handleTrashEvent(e){
+  const trash = e.currentTarget;
+}
+
+//-------------------------------------------
 
 function removeNewTaskMenu() {
   taskButtons.style.display = "flex";
@@ -132,6 +175,60 @@ nameInput.addEventListener("input", () => {
     ? "text-highlight 2.5s infinite ease-in-out"
     : "none";
 });
+
+//----------------------------------Drag-event
+let draggedtask = null;
+
+taskList.addEventListener("dragstart", (e) => {
+  draggedItem = e.target;
+  setTimeout(() => {
+    e.target.style.display = "none";
+  }, 100);
+});
+
+taskList.addEventListener("dragend", (e) => {
+  setTimeout(() => {
+    draggedItem = null;
+    e.target.style.display = "";
+  }, 100);
+});
+
+//--
+
+taskList.addEventListener("dragover", (e) => {
+  e.preventDefault();
+  const afterElement = getDragAfterElement(taskList, e.clientY);
+  const currentElement = document.querySelector(".dragging");
+  if (afterElement == null) {
+    taskList.appendChild(draggedItem);
+  } else {
+    taskList.insertBefore(draggedItem, afterElement);
+  }
+});
+
+const getDragAfterElement = (container, y) => {
+  const draggableElements = [
+    ...container.querySelectorAll("li:not(.dragging)"),
+  ];
+
+  return draggableElements.reduce(
+    (closest, child) => {
+      const box = child.getBoundingClientRect();
+      const offset = y - box.top - box.height / 2;
+      if (offset < 0 && offset > closest.offset) {
+        return {
+          offset: offset,
+          element: child,
+        };
+      } else {
+        return closest;
+      }
+    },
+    {
+      offset: Number.NEGATIVE_INFINITY,
+    }
+  ).element;
+};
 
 //----------------------------------Local-Storage
 
