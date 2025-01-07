@@ -1,10 +1,6 @@
-//add completion stats
 //add priority tasks
-//drag tasks
 //add input validation
-//add new year resolution page
 //testing
-//add progress bar till due date
 //pop warnings
 
 let newTaskButton = document.getElementById("new-task");
@@ -13,6 +9,7 @@ let taskFormContainer = document.querySelector(".create-task");
 let taskForm = document.getElementById("task-form");
 let taskList = document.getElementById("task-list");
 let tasks = new Array();
+const defaultText = "fill this field with a new name";
 
 newTaskButton.addEventListener("click", () => {
   taskButtons.style.display = "none";
@@ -21,23 +18,33 @@ newTaskButton.addEventListener("click", () => {
 
 taskForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  //validaciones
   if (tasks.length < 1) {
     taskList.textContent = "";
   }
-  tasks.unshift(recoverInput());
-  storeInLocalStorage();
-  createListElement(0);
-  removeNewTaskMenu();
-  restetInput();
+  let newTask = recoverInput();
+  if (validateInput(newTask[0])) {
+    tasks.unshift(newTask);
+    storeInLocalStorage();
+    createListElement(0);
+    removeNewTaskMenu();
+    restetInput();
+  } else {
+    alert("invalid name. try again");
+  }
 });
 
-function validateInput(name) {}
+function validateInput(itemName) {
+  if (!itemName || itemName === defaultText) {
+    return false;
+  }
+  return !tasks.some((task) => {
+    return task[0] === itemName;
+  });
+}
 
 function recoverInput() {
   let taskName = taskForm.elements.taskName.value.trim();
   let taskDate = taskForm.elements.taskDate.value.trim();
-  console.log(taskName);
   console.log(taskDate);
   return [taskName, taskDate];
 }
@@ -141,16 +148,26 @@ function createTaskCheckHandler() {
         "xlink:href",
         `assets/icons.svg#${iconType}`
       );
-      check.parentNode.classList.toggle("completed");
+    check.parentNode.classList.toggle("completed");
   };
 }
 
-function handleEditEvent(){
+function handleEditEvent() {}
 
+function handleTrashEvent(e) {
+  const trash = e.currentTarget;
+  const task = trash.parentNode;
+  task.parentNode.removeChild(task);
+  const taskContent = task.textContent;
+  deleteTaskItemFromTaskList(taskContent);
 }
 
-function handleTrashEvent(e){
-  const trash = e.currentTarget;
+function deleteTaskItemFromTaskList(item) {
+  const updatedTasks = tasks.filter((task) => {
+    return task[0] !== item;
+  });
+  tasks = updatedTasks;
+  storeInLocalStorage();
 }
 
 //-------------------------------------------
