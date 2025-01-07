@@ -118,10 +118,6 @@ svg {
   border-radius: 3px;
 }
 
-/* li.completed .task-icon{
-  box-shadow: var(--sunken-effect);
-} */
-
 .task-icon{
   display: flex;
   justify-content: center;
@@ -159,6 +155,19 @@ svg {
 .check-icon svg{
   width: 100%;
   height: 100%;
+}
+
+.editing{
+  color: rgb(254, 175, 91);
+  outline: none;
+  animation: focus-highlight 4s infinite ease-in-out;
+}
+.editing div{
+  animation: focus-highlight 4s infinite ease-in-out;
+}
+.editing p{
+  outline: none;
+  color: rgb(135, 155, 237);
 }
 
 li::after {
@@ -393,5 +402,21 @@ button:hover {
   100% {
     color: #413737;
     border: 1px solid transparent;
+  }
+}
+
+@keyframes focus-highlight {
+  0% {
+    color: #413737;
+  }
+
+  50% {
+    color: var(--accent-color);
+    box-shadow: inset 0 0 10px var(--accent-color), outset var(--sunken-effect);
+    background-color: rgba(114, 87, 130, 0.114);
+  }
+
+  100% {
+    color: #413737;
   }
 }

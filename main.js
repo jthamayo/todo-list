@@ -96,6 +96,7 @@ function addEditIcon() {
   let container = document.createElement("div");
   container.classList.add("edit-icon");
   container.classList.add("task-icon");
+  container.addEventListener("click", handleEditEvent);
   let icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   let useElement = document.createElementNS(
     "http://www.w3.org/2000/svg",
@@ -152,7 +153,42 @@ function createTaskCheckHandler() {
   };
 }
 
-function handleEditEvent() {}
+function handleEditEvent(e) {
+  const edit = e.currentTarget;
+  const taskName = edit.parentNode.querySelector("p");
+  taskName.parentNode.classList.toggle("editing");
+  const oldName = taskName.textContent;
+  taskName.setAttribute("contentEditable", "true");
+  
+  taskName.focus();
+  const range = document.createRange();
+  const selection = window.getSelection();
+  range.selectNodeContents(taskName);
+  range.collapse(false);
+  selection.removeAllRanges();
+  selection.addRange(range);
+
+  taskName.addEventListener("focusout", () => {
+    let taskEdit = taskName.textContent.trim();
+    taskName.parentNode.classList.remove("editing");
+    taskName.setAttribute("contentEditable", "false");
+    editTaskInArray(oldName, taskEdit);
+    storeInLocalStorage();
+  }); 
+}
+
+function editTaskInArray(oldName, newName) {
+  tasks = tasks.map((task) => {
+    if (task[0] === oldName) {
+      if(!validateInput(newName)) {
+        alert("task name already exists");
+        return task;
+      }
+      task[0] = newName;
+    }
+    return task;
+  });
+}
 
 function handleTrashEvent(e) {
   const trash = e.currentTarget;
