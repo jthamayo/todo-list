@@ -9,7 +9,9 @@ let taskFormContainer = document.querySelector(".create-task");
 let taskForm = document.getElementById("task-form");
 let taskList = document.getElementById("task-list");
 let tasks = new Array();
-document.getElementById("task-date").min = new Date().toLocaleDateString('fr-ca');
+document.getElementById("task-date").min = new Date().toLocaleDateString(
+  "fr-ca"
+);
 const defaultText = "fill this field with a new name";
 
 newTaskButton.addEventListener("click", () => {
@@ -24,18 +26,33 @@ taskForm.addEventListener("submit", (e) => {
   if (e.submitter.value === "submitter") {
     let newTask = recoverInput();
     if (!validateInput(newTask[0])) {
-      alert("Invalid name. Try again.");
+      Swal.fire({
+        heightAuto: false,
+        icon: "error",
+        background: "#fff8f8",
+        confirmButtonColor: "#fc7ce2",
+        title: "Invalid name",
+        text: "Please enter a unique name for the task",
+      });
       restetInput();
       return;
     }
 
     if (!validateDate(newTask[1])) {
-      alert("Invalid date");
+      Swal.fire({
+        heightAuto: false,
+        icon: "error",
+        background: "#fff8f8",
+        confirmButtonColor: "#fc7ce2",
+        title: "Invalid date",
+        text: "Please enter a date",
+      });
       return;
     }
 
     if (tasks.length < 1) {
       taskList.textContent = "";
+      taskList.style.display = "block";
     }
     tasks.unshift(newTask);
     storeInLocalStorage();
@@ -58,7 +75,7 @@ function validateInput(itemName) {
 }
 
 function validateDate(itemDate) {
-    return !!itemDate;
+  return !!itemDate;
 }
 
 function recoverInput() {
@@ -190,16 +207,17 @@ function handleEditEvent(e) {
     let taskEdit = taskName.textContent.trim();
     taskName.parentNode.classList.remove("editing");
     taskName.setAttribute("contentEditable", "false");
-    editTaskInArray(oldName, taskEdit);
+    editTaskInArray(taskName, oldName, taskEdit);
     storeInLocalStorage();
   });
 }
 
-function editTaskInArray(oldName, newName) {
+function editTaskInArray(taskItem, oldName, newName) {
   tasks = tasks.map((task) => {
     if (task[0] === oldName) {
       if (!validateInput(newName)) {
         alert("task name already exists");
+        taskItem.textContent = oldName;
         return task;
       }
       task[0] = newName;
@@ -232,8 +250,26 @@ function removeNewTaskMenu() {
 }
 
 document.getElementById("clear-tasks").addEventListener("click", () => {
-  taskList.innerHTML = "You have no tasks so far";
-  deleteTasks();
+  Swal.fire({
+    heightAuto: false,
+    title: "Are you sure?",
+    text: "This action cannot be reversed",
+    icon: "warning",
+    showCancelButton: true,
+    background: "#fff8f8",
+    confirmButtonColor: "#879bed",
+    iconColor: "#fc7c7c",
+    cancelButtonColor: "#fc7c7c",
+    confirmButtonText: "Yes",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      deleteTasks();
+      taskList.innerHTML = "You have no tasks so far";
+      taskList.style.display = "flex";
+      taskList.style.alignItems = "center";
+      taskList.style.justifyContent = "center";
+    }
+  });
 });
 
 const nameInput = document.getElementById("task-name");
@@ -318,11 +354,16 @@ function recoverLocalStorageData() {
 function displayRecoveredData() {
   if (recoverLocalStorageData()) {
     taskList.textContent = "";
+    taskList.style.display = "block";
+
     for (let i = tasks.length - 1; i >= 0; i--) {
       createListElement(i);
     }
   } else {
     taskList.textContent = "You have no tasks so far";
+    taskList.style.display = "flex";
+    taskList.style.alignItems = "center";
+    taskList.style.justifyContent = "center";
   }
 }
 
