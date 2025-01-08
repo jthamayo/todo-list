@@ -9,6 +9,7 @@ let taskFormContainer = document.querySelector(".create-task");
 let taskForm = document.getElementById("task-form");
 let taskList = document.getElementById("task-list");
 let tasks = new Array();
+document.getElementById("task-date").min = new Date().toLocaleDateString('fr-ca');
 const defaultText = "fill this field with a new name";
 
 newTaskButton.addEventListener("click", () => {
@@ -17,19 +18,33 @@ newTaskButton.addEventListener("click", () => {
 });
 
 taskForm.addEventListener("submit", (e) => {
+  const currentDate = new Date();
+  console.log(currentDate);
   e.preventDefault();
-  if (tasks.length < 1) {
-    taskList.textContent = "";
-  }
-  let newTask = recoverInput();
-  if (validateInput(newTask[0])) {
+  if (e.submitter.value === "submitter") {
+    let newTask = recoverInput();
+    if (!validateInput(newTask[0])) {
+      alert("Invalid name. Try again.");
+      restetInput();
+      return;
+    }
+
+    if (!validateDate(newTask[1])) {
+      alert("Invalid date");
+      return;
+    }
+
+    if (tasks.length < 1) {
+      taskList.textContent = "";
+    }
     tasks.unshift(newTask);
     storeInLocalStorage();
     createListElement(0);
     removeNewTaskMenu();
     restetInput();
   } else {
-    alert("invalid name. try again");
+    removeNewTaskMenu();
+    restetInput();
   }
 });
 
@@ -42,10 +57,13 @@ function validateInput(itemName) {
   });
 }
 
+function validateDate(itemDate) {
+    return !!itemDate;
+}
+
 function recoverInput() {
   let taskName = taskForm.elements.taskName.value.trim();
   let taskDate = taskForm.elements.taskDate.value.trim();
-  console.log(taskDate);
   return [taskName, taskDate];
 }
 
@@ -159,7 +177,7 @@ function handleEditEvent(e) {
   taskName.parentNode.classList.toggle("editing");
   const oldName = taskName.textContent;
   taskName.setAttribute("contentEditable", "true");
-  
+
   taskName.focus();
   const range = document.createRange();
   const selection = window.getSelection();
@@ -174,13 +192,13 @@ function handleEditEvent(e) {
     taskName.setAttribute("contentEditable", "false");
     editTaskInArray(oldName, taskEdit);
     storeInLocalStorage();
-  }); 
+  });
 }
 
 function editTaskInArray(oldName, newName) {
   tasks = tasks.map((task) => {
     if (task[0] === oldName) {
-      if(!validateInput(newName)) {
+      if (!validateInput(newName)) {
         alert("task name already exists");
         return task;
       }

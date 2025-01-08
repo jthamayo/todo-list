@@ -161,6 +161,7 @@ svg {
   color: rgb(254, 175, 91);
   outline: none;
   animation: focus-highlight 4s infinite ease-in-out;
+  text-decoration-color: rgba(135, 155, 237, 0.245) !important;
 }
 .editing div{
   animation: focus-highlight 4s infinite ease-in-out;
