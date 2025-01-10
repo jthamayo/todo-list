@@ -113,7 +113,7 @@ li #name {
   white-space: nowrap;
 }
 
-li #date{
+li #date {
   margin-left: auto;
   white-space: nowrap;
   font-size: 16px;
@@ -316,20 +316,16 @@ li.completed::before {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  
 }
 
-#clock{
+#clock {
   font-weight: bold;
   font-size: 30px;
 }
 
-#date{
+#date {
   font-size: 13px;
 }
-
-
-
 
 /*----------------------------------------------*/
 
@@ -348,7 +344,6 @@ main {
   text-align: center;
   background-color: var(--secondary-color);
   max-width: 900px;
-  min-width: 490px;
   min-height: 640px;
 }
 
@@ -536,6 +531,96 @@ button:hover {
 
 .swal2-actions button:active {
   box-shadow: none;
+}
+
+/* ----------------------------------responsive */
+
+@media screen and (max-width: 600px) {
+  main {
+    flex-direction: column;
+    overflow-y: scroll;
+    justify-content: flex-start;
+    gap: 20px;
+  }
+
+  div.container {
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 20px;
+    height: 1000px;
+    margin-bottom: 130px;
+  }
+
+  #completion-circle {
+    width: 90%;
+    aspect-ratio: 1/1;
+  }
+
+  div.card {
+    height: 1000px;
+    width: 100%;
+  }
+
+  .task-icon {
+    width: 20px;
+    aspect-ratio: 1/1;
+  }
+
+  div#task-buttons,
+  div.create-task {
+    position: fixed;
+    bottom: 0;
+    z-index: 100;
+  }
+  input#task-name {
+    width: 100%;
+  }
+
+  .create-task {
+    height: 300px;
+  }
+
+  div.task-row {
+    width: 90%;
+    height: 90%;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+  }
+  #task-form {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .task-input {
+    width: 100% !important;
+    height: 80px !important;
+    padding: 0;
+  }
+
+  #task-name {
+    padding: 0;
+  }
+
+  .task-row button {
+    width: 40px;
+    height: 40px;
+    align-self: flex-end;
+  }
+  .task-input {
+    width: 100%;
+    height: 40px;
+  }
+  div.task-list-container {
+    width: 100%;
+  }
+  .stats {
+    width: 100%;
+  }
 }
 
 /*---------------------------- animations */
