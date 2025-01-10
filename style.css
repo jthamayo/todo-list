@@ -105,10 +105,18 @@ li.completed {
   text-decoration: line-through;
 }
 
-li p {
+li #name {
   overflow: hidden;
-  max-width: 57%;
+  width: 57%;
+  text-align: left;
+  max-width: 200px;
   white-space: nowrap;
+}
+
+li #date{
+  margin-left: auto;
+  white-space: nowrap;
+  font-size: 16px;
 }
 
 /*--------------------------------- icons------------------------------------ */
@@ -138,9 +146,9 @@ svg {
   margin: 0;
   margin-right: 15px;
 }
+/* 
 .edit-icon {
-  margin-left: auto;
-}
+} */
 .check-icon {
   margin: 0 15px;
 }
@@ -339,7 +347,7 @@ main {
   align-items: center;
   text-align: center;
   background-color: var(--secondary-color);
-  max-width: 800px;
+  max-width: 900px;
   min-width: 490px;
   min-height: 640px;
 }

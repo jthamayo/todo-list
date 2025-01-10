@@ -30,7 +30,7 @@ taskForm.addEventListener("submit", (e) => {
         icon: "error",
         background: "#fff8f8",
         confirmButtonColor: "#fc7ce2",
-        title: "Invalid name",
+        title: "Try again",
         text: "Please enter a unique name for the task",
       });
       restetInput();
@@ -43,7 +43,7 @@ taskForm.addEventListener("submit", (e) => {
         icon: "error",
         background: "#fff8f8",
         confirmButtonColor: "#fc7ce2",
-        title: "Invalid date",
+        title: "Try again",
         text: "Please enter a date",
       });
       return;
@@ -94,13 +94,26 @@ function restetInput() {
     "text-highlight 2.5s infinite ease-in-out";
 }
 
+function calculateRemainingDays(date) {
+  let today = new Date();
+  let dueDate = new Date(date);
+  let timeDifference = dueDate - today;
+  let daysRemaining = Math.floor(timeDifference / (1000 * 60 * 60 * 24) + 1);
+  return `${daysRemaining}·d`;
+}
+
 function createListElement(num) {
   let newTaskElement = document.createElement("li");
   let text = document.createElement("p");
+  let due = document.createElement("p");
+  text.setAttribute("id", "name");
+  due.setAttribute("id", "date");
   text.textContent = tasks[num][0];
+  due.textContent = calculateRemainingDays(tasks[num][1]);
 
   newTaskElement.appendChild(addCheckIcon());
   newTaskElement.appendChild(text);
+  newTaskElement.appendChild(due);
   newTaskElement.appendChild(addEditIcon());
   newTaskElement.appendChild(addDeleteIcon());
   newTaskElement.setAttribute("draggable", "true");
@@ -217,7 +230,6 @@ function editTaskInArray(taskItem, oldName, newName) {
   tasks = tasks.map((task) => {
     if (task[0] === oldName) {
       if (!validateInput(newName)) {
-        alert("task name already exists");
         taskItem.textContent = oldName;
         return task;
       }
@@ -233,6 +245,7 @@ function handleTrashEvent(e) {
   task.parentNode.removeChild(task);
   const taskContent = task.textContent;
   deleteTaskItemFromTaskList(taskContent);
+  updateCompletedTasks();
 }
 
 function deleteTaskItemFromTaskList(item) {
@@ -265,6 +278,7 @@ document.getElementById("clear-tasks").addEventListener("click", () => {
   }).then((result) => {
     if (result.isConfirmed) {
       deleteTasks();
+      updateCompletedTasks();
       taskList.innerHTML = "You have no tasks so far";
       taskList.style.display = "flex";
       taskList.style.alignItems = "center";
@@ -284,17 +298,19 @@ nameInput.addEventListener("input", () => {
     : "none";
 });
 
-
 //--------------------------------progress-towards-completion
 
-function updateCompletedTasks(){
+function updateCompletedTasks() {
   let completedTasks = document.querySelectorAll(".completed").length;
   let tasks = document.querySelectorAll("li").length;
-  let percentage = Math.trunc(completedTasks/tasks * 100);
-  document.getElementById("completed-progress").style.setProperty("--percentage-progress", `${percentage}%`);
+  let percentage = Math.trunc((completedTasks / tasks) * 100);
+  document
+    .getElementById("completed-progress")
+    .style.setProperty("--percentage-progress", `${percentage}%`);
   document.getElementById("center").textContent = `${percentage}%`;
+  document.getElementById("stats-info").textContent =
+    percentage === 100 ? "Congratulations!" : "Completed tasks";
 }
-
 
 //----------------------------------Drag-event
 let draggedtask = null;
