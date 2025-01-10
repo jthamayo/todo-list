@@ -35,6 +35,11 @@ A simple, intuitive, and visually appealing To-Do List app built with HTML, CSS,
 - **JavaScript**: To handle task functionalities like adding, deleting, and marking tasks as completed.
 - **Local Storage**: To persist tasks even after the page is refreshed.
 
+## Installation:
+1. Clone the repository.
+`https://github.com/jthamayo/todo-list.git`
+3. Open `index.html` in your browser.
+
 ## Next Steps
 
 Upcoming features:
