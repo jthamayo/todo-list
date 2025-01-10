@@ -254,8 +254,8 @@ li.completed::before {
     rgb(254, 175, 91),
     var(--completed-color),
     var(--accent-color),
-    rgb(135, 155, 237) 86%,
-    transparent 87%
+    rgb(135, 155, 237) var(--percentage-progress),
+    transparent var(--percentage-progress)
   );
 }
 

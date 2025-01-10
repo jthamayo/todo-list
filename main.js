@@ -21,7 +21,6 @@ newTaskButton.addEventListener("click", () => {
 
 taskForm.addEventListener("submit", (e) => {
   const currentDate = new Date();
-  console.log(currentDate);
   e.preventDefault();
   if (e.submitter.value === "submitter") {
     let newTask = recoverInput();
@@ -59,6 +58,7 @@ taskForm.addEventListener("submit", (e) => {
     createListElement(0);
     removeNewTaskMenu();
     restetInput();
+    updateCompletedTasks();
   } else {
     removeNewTaskMenu();
     restetInput();
@@ -185,6 +185,7 @@ function createTaskCheckHandler() {
         `assets/icons.svg#${iconType}`
       );
     check.parentNode.classList.toggle("completed");
+    updateCompletedTasks();
   };
 }
 
@@ -282,6 +283,18 @@ nameInput.addEventListener("input", () => {
     ? "text-highlight 2.5s infinite ease-in-out"
     : "none";
 });
+
+
+//--------------------------------progress-towards-completion
+
+function updateCompletedTasks(){
+  let completedTasks = document.querySelectorAll(".completed").length;
+  let tasks = document.querySelectorAll("li").length;
+  let percentage = Math.trunc(completedTasks/tasks * 100);
+  document.getElementById("completed-progress").style.setProperty("--percentage-progress", `${percentage}%`);
+  document.getElementById("center").textContent = `${percentage}%`;
+}
+
 
 //----------------------------------Drag-event
 let draggedtask = null;
