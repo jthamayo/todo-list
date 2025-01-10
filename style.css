@@ -14,11 +14,11 @@
   --accent-color: #fc7ce2;
   --completed-color: #fc7c7c;
   --sunken-effect: inset 6px 6px 15px 0 var(--shadow-color),
-    inset -6px -6px 10px 0 white;
+    inset -6px -6px 10px 0 #fdf0f8;
   --bump-effect: inset 6px 6px 10px 0 var(--light-color),
     inset -6px -6px 10px 0 var(--shadow-color);
   --raised-effect: 6px 6px 10px 0 var(--shadow-color),
-    -6px -6px 10px 0 var(--light-color);
+    -6px -6px 10px 0 #ffe6f5;
   --slit-effect: -6px -6px 10px 0 var(--light-color);
 }
 
@@ -34,6 +34,7 @@ body {
 }
 
 h1 {
+  height: 10%;
   text-transform: uppercase;
   font-weight: bold;
   padding: 5%;
@@ -221,6 +222,11 @@ li.completed::before {
 .xmark-icon {
   fill: var(--completed-color);
 }
+
+
+/* ----------------------STATS---------------------- */
+
+
 /*----------------------------------------------*/
 
 body {
@@ -229,7 +235,7 @@ body {
 
 main {
   margin: 0 auto;
-  width: 60%;
+  width: 90%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -243,11 +249,15 @@ main {
 
 .card {
   border-radius: 20px;
-  height: 60%;
-  width: 100%;
+  height: 100%;
+  width: 60%;
   min-height: 400px;
   background-color: var(--base-color);
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .card::before {
@@ -263,13 +273,24 @@ main {
   pointer-events: none;
 }
 
-.container {
-  width: 100%;
+.stats{
+  border-radius: 20px;
   height: 100%;
+  width: 35%;
+  min-height: 400px;
+  background-color: var(--base-color);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  box-shadow: var(--sunken-effect);
+}
+
+.container {
+  width: 100%;
+  height: 60%;
+  display: flex;
+  justify-content: space-between;
 }
 
 #task-buttons {

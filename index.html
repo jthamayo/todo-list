@@ -15,8 +15,8 @@
   <body>
     <main>
       <h1>To do list</h1>
-      <div class="card">
-        <div class="container">
+      <div class="container">
+        <div class="card">
           <!-------------------------- task list ---------------------------->
 
           <div class="task-list-container">
@@ -25,19 +25,22 @@
             </ul>
           </div>
         </div>
+        <div class="stats">
+         
+        </div>
       </div>
       <div id="task-buttons">
         <button id="new-task">
-            <svg class="plus-icon">
-              <use xlink:href="assets/icons.svg#plus-solid"></use>
-            </svg>
-            <p>New task</p>
+          <svg class="plus-icon">
+            <use xlink:href="assets/icons.svg#plus-solid"></use>
+          </svg>
+          <p>New task</p>
         </button>
         <button id="clear-tasks">
-            <svg class="xmark-icon">
-              <use xlink:href="assets/icons.svg#xmark-solid"></use>
-            </svg>
-            <p>Clear tasks</p>
+          <svg class="xmark-icon">
+            <use xlink:href="assets/icons.svg#xmark-solid"></use>
+          </svg>
+          <p>Clear tasks</p>
         </button>
       </div>
       <!-------------------------- task form ---------------------------->
@@ -56,21 +59,18 @@
               />
             </div>
             <div class="task-input">
-              <input
-                type="date"
-                value="..."
-                id="task-date"
-                name="taskDate"
-              />
+              <input type="date" value="..." id="task-date" name="taskDate" />
             </div>
             <button type="submit" value="submitter">
-            <svg class="plus-icon">
-              <use xlink:href="assets/icons.svg#plus-solid"></use>
-            </svg>
+              <svg class="plus-icon">
+                <use xlink:href="assets/icons.svg#plus-solid"></use>
+              </svg>
             </button>
-            <button><svg class="xmark-icon">
-              <use xlink:href="assets/icons.svg#xmark-solid"></use>
-            </svg></button>
+            <button>
+              <svg class="xmark-icon">
+                <use xlink:href="assets/icons.svg#xmark-solid"></use>
+              </svg>
+            </button>
           </div>
         </form>
       </div>
