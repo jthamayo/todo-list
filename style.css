@@ -33,10 +33,9 @@ body {
 }
 
 h1 {
-  height: 10%;
   text-transform: uppercase;
   font-weight: bold;
-  padding: 5%;
+  padding: 2%;
   text-shadow: 0 0 10px var(--shadow-color);
 }
 
@@ -224,11 +223,20 @@ li.completed::before {
 
 /* ----------------------STATS---------------------- */
 
+#completion-circle {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  height: 55%;
+  width: 100%;
+}
+
 .circle {
   box-shadow: var(--raised-effect);
   background-color: var(--secondary-color);
   border-radius: 50%;
-  height: 40%;
+  height: 70%;
   aspect-ratio: 1/1;
   position: relative;
 }
@@ -241,8 +249,7 @@ li.completed::before {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  box-shadow: inset 3px 3px 4px 0 #e1c6cb6d,
-  inset -3px -3px 4px 0 #fdf0f88a;
+  box-shadow: inset 3px 3px 4px 0 #e1c6cb6d, inset -3px -3px 4px 0 #fdf0f88a;
   background: conic-gradient(
     rgb(254, 175, 91),
     var(--completed-color),
@@ -290,6 +297,32 @@ li.completed::before {
   justify-content: center;
 }
 
+/* ------------------TIME--------------------------- */
+
+.time {
+  border-radius: 20px;
+  width: 60%;
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  
+}
+
+#clock{
+  font-weight: bold;
+  font-size: 30px;
+}
+
+#date{
+  font-size: 13px;
+}
+
+
+
+
 /*----------------------------------------------*/
 
 body {
@@ -301,13 +334,14 @@ main {
   width: 90%;
   height: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   flex-direction: column;
   align-items: center;
   text-align: center;
   background-color: var(--secondary-color);
   max-width: 800px;
   min-width: 490px;
+  min-height: 640px;
 }
 
 .card {
@@ -344,7 +378,8 @@ main {
   background-color: var(--base-color);
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 20px;
   align-items: center;
   box-shadow: var(--sunken-effect);
 }
@@ -366,7 +401,6 @@ main {
   box-shadow: var(--sunken-effect);
   border-radius: 20px;
   background-color: var(--base-color);
-  margin: 5% 0;
 }
 
 #task-buttons button {
@@ -400,7 +434,6 @@ main {
   box-shadow: var(--sunken-effect);
   border-radius: 20px;
   background-color: var(--base-color);
-  margin: 5% 0;
   justify-content: center;
 }
 

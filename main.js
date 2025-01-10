@@ -337,6 +337,49 @@ const getDragAfterElement = (container, y) => {
   ).element;
 };
 
+//--------------------------------time
+
+const day = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+
+const month = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+const now = new Date();
+document.getElementById("date").textContent = `${day[now.getDay()]}
+ ${now.getDate()}, ${month[now.getMonth()]}`;
+
+function updateTime() {
+  const now = new Date();
+  const hours = now.getHours().toString().padStart(2, "0");
+  const minutes = now.getMinutes().toString().padStart(2, "0");
+  const seconds = now.getSeconds().toString().padStart(2, "0");
+  const timeString = `${hours}:${minutes}:${seconds}`;
+  document.getElementById("clock").textContent = timeString;
+}
+
+updateTime();
+setInterval(updateTime, 1000);
+
 //----------------------------------Local-Storage
 
 function storeInLocalStorage() {
