@@ -24,7 +24,7 @@ A simple, intuitive, and visually appealing To-Do List app built with HTML, CSS,
 
 - **Soft Background Colors**: Light pastel shades for the background, creating a minimalist and peaceful UI.
 - **Subtle Accents**: Soft accent colors for buttons and interactive elements.
-- **Subtle Textures**: The app incorporates gardients in certain elements, such as the task list and buttons, to evoke a sense of physicality and interaction. These textures are light and unobtrusive, enhancing the overall design without detracting from the simplicity of the app.
+- **Subtle Textures**: The app incorporates gardients in certain elements, such as the task list and buttons, to evoke a sense of physicality and interaction.
 - **Depth and Volume**: Using soft shadows and layered elements, the app creates a sense of **depth** and **volume**.
 - **Elevated Interaction**: Buttons, task checkboxes, and delete icons are designed with soft gradients and shadow effects, adding a tactile "clickable" feel.
 
@@ -34,6 +34,11 @@ A simple, intuitive, and visually appealing To-Do List app built with HTML, CSS,
 - **CSS3**: For the responsive styling and layout.
 - **JavaScript**: To handle task functionalities like adding, deleting, and marking tasks as completed.
 - **Local Storage**: To persist tasks even after the page is refreshed.
+
+## Installation:
+1. Clone the repository.
+`https://github.com/jthamayo/todo-list.git`
+3. Open `index.html` in your browser.
 
 ## Next Steps
 
