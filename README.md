@@ -2,6 +2,7 @@
 
 ## Description
 
+[Preview](https://todo-list-nu-rose.vercel.app/) - 
 A simple, intuitive, and visually appealing To-Do List app built with HTML, CSS, and JavaScript. This app is designed for users who want an easy and efficient way to manage their tasks, all within a minimalist interface that stands out with its soft color palette. The focus is on usability and functionality, while offering a visually pleasant and engaging experience.
 
 ## Screenshots
